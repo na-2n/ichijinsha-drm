@@ -12,8 +12,7 @@ def scramble(img: Image, cols: int, rows: int) -> Tuple:  # Tuple[Image, str]
     w = floor((img.width - img.width % 8) / cols)
     h = floor((img.height - img.height % 8) / rows)
 
-    size = cols * rows
-    tiles = list(range(0, size))
+    tiles = list(range(0, cols * rows))
     shuffle(tiles)
 
     cp = img.copy();
@@ -38,7 +37,7 @@ def scramble(img: Image, cols: int, rows: int) -> Tuple:  # Tuple[Image, str]
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 5:
         print(f'usage: {os.sys.argv[0]} <in> <columns> <rows> <out>')
         exit()
 

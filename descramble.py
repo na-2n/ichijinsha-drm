@@ -8,10 +8,13 @@ from PIL import Image
 
 def descramble(img: Image, drm_hash: str) -> Image:
     cp = img.copy()
-    columns, rows, *tiles = b64decode(drm_hash)
 
-    if columns * rows != len(tiles):
-        raise Exception("invalid hash")
+    try:
+        columns, rows, *tiles = b64decode(drm_hash)
+
+        assert columns * rows == len(tiles)
+    except:
+        raise ValueError('drm_hash is not a valid hash') from None
 
     tile_width = floor((img.width - img.width % 8) / columns)
     tile_height = floor((img.height - img.height % 8) / rows)
@@ -35,13 +38,13 @@ def descramble(img: Image, drm_hash: str) -> Image:
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         print(f'usage: {os.sys.argv[0]} <in> <drm hash> [out]')
         exit()
 
     with Image.open(sys.argv[1]) as img:
         with descramble(img, sys.argv[2]) as im:
-            if len(sys.argv) > 2:
+            if len(sys.argv) > 3:
                 im.save(sys.argv[3])
             else:
                 im.show()
