@@ -38,7 +38,7 @@ def scramble(img: Image, cols: int, rows: int) -> Tuple:  # Tuple[Image, str]
 
 if __name__ == '__main__':
     if len(sys.argv) < 5:
-        print(f'usage: {os.sys.argv[0]} <in> <columns> <rows> <out>')
+        print(f'usage: {sys.argv[0]} <in> <columns> <rows> <out>')
         exit()
 
     with Image.open(sys.argv[1]) as img:

@@ -39,7 +39,7 @@ def descramble(img: Image, drm_hash: str) -> Image:
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
-        print(f'usage: {os.sys.argv[0]} <in> <drm hash> [out]')
+        print(f'usage: {sys.argv[0]} <in> <drm hash> [out]')
         exit()
 
     with Image.open(sys.argv[1]) as img:
